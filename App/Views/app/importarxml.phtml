@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card" style="width: 36rem;">
+      <div class="card-body">
+
+        <div class="d-flex justify-content-center">
+          <img src="/img/logo.png" style=" width: 125px;height: 125px;" />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h2>Buscar de aluno por codigo </h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            
+            <form action="/importeXml" method="post" enctype="multipart/form-data" >
+              <div class="form-group">
+                <input type="file"    name = "xml" class="form-control" >
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block">Importar</button>
+
+          <!--   <?php if($this->view->erroCadastroC ){ ?> 
+
+                <small class="form-text  text-danger"> * Erro ao tentar realizar  o cadastro, verifique se os campos foram preenchidos corretamente. </small>
+
+
+             <?php } ?>  -->
+
+             
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+  

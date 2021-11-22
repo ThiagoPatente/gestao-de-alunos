@@ -1,0 +1,83 @@
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+          
+
+          $("#nameI").change(function(){
+                $newValue = $("#nameI").val();
+                
+                $('#nameI').attr('value',  $newValue)
+
+        });
+
+          $("#codigoI").change(function(){
+
+              $newValue = $("#codigoI").val();
+
+
+            $('#codigoI').attr('value',  $newValue)
+
+            console.log($("#codigoI").val());
+
+         
+
+        });
+});
+
+
+
+</script>
+<div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card" style="width: 36rem;">
+      <div class="card-body">
+
+        <div class="d-flex justify-content-center">
+          <img src="/img/logo.png" style=" width: 125px;height: 125px;" />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h2>Editar o curso </h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <?php foreach ($this->view->editarC as $id_curso => $curso) { ?>
+            <form action="/editarCurso" method="post">
+              <div class="form-group">
+                <input type="hidden" name="id" value="<?=$curso['idCurso']?>">
+                <input type="text" id="nameI"   name = "nome" class="form-control" value ="<?=$curso['nome']?>">
+              </div>
+              
+              <div class="form-group">
+                <input type="text" id="codigoI"  name = "codigo" class="form-control" value ="<?=$curso['codigo']?>">
+              </div>
+
+              
+              <button type="submit" class="btn btn-primary btn-block">Editar</button>
+            <?php } ?>
+
+             <?php if($this->view->erroEditarC ){ ?> 
+
+                <small class="form-text  text-danger"> * Erro ao tentar realizar  o cadastro, verifique se os campos foram preenchidos corretamente. </small>
+
+
+             <?php } ?> 
+
+             
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+  

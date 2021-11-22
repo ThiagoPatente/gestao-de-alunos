@@ -1,0 +1,248 @@
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+          
+
+
+            var request = $.ajax({
+                                                
+                       url: "https://serviceweb.aix.com.br/aixapi/api/cep/"+$("#cep").val(),
+                                                  method: "GET"
+                                              });
+                            request.done(function( data ) {
+                                                    
+                                                    console.log(data);
+
+                                                    console.log(data['bairro']);
+
+                                                     $('#bairro').attr('value', data['bairro']);
+
+                                                      $('#bairro').attr('disabled',false);
+                                                     $('#logradouro').attr('value', data['logradouro']);
+
+                                                     $('#logradouro').attr('disabled',false);
+                                                     $('#cidade').attr('value', data['cidade']);
+                                                     $('#cidade').attr('disabled',false);
+                                                     
+                                                     $('#estado').attr('value', data['estado']);
+                                                  
+                                                      $('#estado').attr('disabled',false);
+
+                                                     $("#erro").html("");
+
+
+                                                     $('#cadastrarB').attr('disabled',false);
+
+                                              });
+                                                
+                                              request.fail(function( error ) {
+                                                 
+                                                  $("#erro").html(" <small class='form-text  text-danger'> * Cep invalido </small>");
+
+
+
+                                              });
+
+
+
+
+
+          $("#nameI").change(function(){
+                $newValue = $("#nameI").val();
+                
+                $('#nameI').attr('value',  $newValue)
+
+        });
+
+          $("#codigoI").change(function(){
+
+              $newValue = $("#codigoI").val();
+
+
+            $('#codigoI').attr('value',  $newValue)
+
+
+
+         
+
+        });
+
+
+          $("#situacaoI").change(function(){
+
+              $newValue = $("#situacaoI").val();
+
+
+            $('#situacaoI').attr('value',  $newValue)
+
+           
+         
+
+        });
+
+
+
+              $("#cep").change(function(){
+             
+                    $tamanho = $("#cep").val();
+
+                      if($tamanho.length == 8) {
+
+                               
+                             var request = $.ajax({
+                                                        url: "https://serviceweb.aix.com.br/aixapi/api/cep/"+$("#cep").val(),
+                                                        method: "GET"
+                                                    });
+                                                    request.done(function( data ) {
+                                                          
+                                                          console.log(data);
+
+                                                          console.log(data['bairro']);
+
+                                                           $('#bairro').attr('value', data['bairro']);
+
+                                                            $('#bairro').attr('disabled',false);
+                                                           $('#logradouro').attr('value', data['logradouro']);
+
+                                                           $('#logradouro').attr('disabled',false);
+                                                           $('#cidade').attr('value', data['cidade']);
+                                                           $('#cidade').attr('disabled',false);
+                                                           
+                                                           $('#estado').attr('value', data['estado']);
+                                                        
+                                                            $('#estado').attr('disabled',false);
+
+                                                           $("#erro").html("");
+
+
+                                                           $('#cadastrarB').attr('disabled',false);
+
+                                                    });
+                                                      
+                                                    request.fail(function( error ) {
+                                                       
+                                                        $("#erro").html(" <small class='form-text  text-danger'> * Cep invalido </small>");
+
+
+
+                                                    });
+
+
+
+                      }
+               
+
+        });
+           
+
+});
+
+
+
+</script>
+<div class="container">
+  <div class="d-flex justify-content-center mt-5">
+    <div class="card" style="width: 36rem;">
+      <div class="card-body">
+
+        <div class="d-flex justify-content-center">
+          <img src="/img/logo.png" style=" width: 125px;height: 125px;" />
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h2>Editar o aluno </h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <?php foreach ($this->view->editarA as $id_aluno => $aluno) { ?>
+            <form action="/editarAluno" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <input type="hidden" name="id" value="<?=$aluno['idAluno']?>">
+                 <p> <strong> Nome do aluno </strong> </p>
+                <input type="text" id="nameI"   name = "nome" class="form-control" value ="<?=$aluno['nome']?>">
+              </div>
+
+               <div class="form-group">
+                 <p> <strong> Codigo do aluno </strong> </p>
+                <input type="text" id="codigoI"   name = "codigo" class="form-control" value ="<?=$aluno['codigo']?>">
+              </div>
+
+              <div class="form-group">
+                <p> <strong> Situação </strong> </p>
+                <input type="text"  id="situacaoI" name = "situacao" class="form-control" placeholder="situacao do aluno" value ="<?=$aluno['situacao']?>" >
+              </div>
+
+
+               <div class="form-group">
+                <p> <strong> turma </strong> </p>
+                <input type="text"  value ="<?=$aluno['turma']?>" name = "turma" class="form-control" placeholder="Turma do aluno">
+              </div>
+
+              <div class="form-group">
+                <p> <strong> curso </strong> </p>
+                <input type="text" value ="<?=$aluno['curso']?>"  name = "curso" class="form-control" placeholder="Curso">
+              </div>
+
+                 <div class="form-group">
+                <p> <strong> Imagem </strong> </p>
+                 <input type="file"    name = "img" class="form-control" >
+              </div>
+
+
+
+              <div class="form-group">
+                <p> <strong> CEP </strong> </p>
+                <input type="text"  id="cep" name = "cep" class="form-control" placeholder="cep do aluno" value ="<?=$aluno['cep']?>">
+                  <div id="erro">
+                  </div>
+              </div>
+
+                <div class="form-group">
+                  <p>  <strong> Bairro </strong> </p>
+                <input  disabled="" type="text"  id="bairro" name = "bairro" class="form-control" style="cursor: not-allowed;">
+              </div>
+
+                <div class="form-group">
+                  <p> <strong> Logradouro </strong> </p>
+                <input  disabled="" type="text" id="logradouro"  name = "logradouro" class="form-control" style="cursor: not-allowed;">
+              </div>
+
+                <div class="form-group">
+                  <p> <strong> Cidade </strong> </p>
+                <input  disabled="" type="text" id="cidade"  name = "cidade" class="form-control" placeholder="codigo do aluno" style="cursor: not-allowed;">
+              </div>
+
+               <div class="form-group">
+                <p> <strong> Estado </strong> </p>
+                <input  disabled="" type="text"  id="estado" name = "estado" class="form-control"  style="cursor: not-allowed;" >
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-block">Editar</button>
+            <?php } ?>
+
+             <?php if($this->view->erroEditarA){ ?> 
+
+                <small class="form-text  text-danger"> * Erro ao tentar realizar  a edicao, verifique se os campos foram preenchidos corretamente. </small>
+
+
+             <?php } ?> 
+
+             
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    
+  

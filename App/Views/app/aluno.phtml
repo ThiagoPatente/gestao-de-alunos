@@ -1,0 +1,120 @@
+
+
+<nav class="navbar navbar-expand-lg menu">
+	<div class="container">
+	  <div class="navbar-nav">
+	  	<a class="menuItem" href="/sistema">
+	  		Home
+	  	</a>
+
+	  	<a class="menuItem" href="/sair">
+	  		Sair
+	  	</a>
+			<img src="/img/logo.png" class="menuIco" />
+	  </div>
+	</div>
+</nav>
+
+<div class="container mt-5">
+	<div class="row pt-2">
+		
+		<div class="col-md-3">
+
+			<div class="perfil">
+				<div class="perfilTopo">
+
+				</div>
+
+				<div class="perfilPainel">
+					
+					<div class="row mt-2 mb-2">
+						<div class="col mb-2">
+							<span class="perfilPainelNome"><?=$_SESSION['nome']?></span>
+						</div>
+					</div>
+
+					<div class="row mb-2">
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	
+		<div class="col-md-6">
+				<h3> Alunos</h3>
+
+					<form action="/alunoCadastro" method="">
+					<button type="submit" class="btn btn-primary mb-2"><small>Cadastrar</small></button>
+				</form>
+
+					<form action="/buscarAluno" method="">
+					<button type="submit" class="btn btn-primary mb-2"><small>Buscar por id</small></button>
+				</form>
+
+				 <?php foreach ($this->view->alunos as $id_aluno => $aluno) { ?>
+					
+				
+				<div class="row tweet">
+				<div class="col">
+					<p> <strong> <?=$aluno['nome']?>  </strong> 
+					</p>
+					<br />
+					<form action="/alunoCadastro" method="post">
+						<input type="hidden" name="action" value="editar">
+						<input type="hidden" name="situacao" value="<?=$aluno['situacao']?>">
+						<input type="hidden" name="cep" value="<?=$aluno['cep']?>">
+						<input type="hidden" name="codigo" value="<?=$aluno['codigo']?>">
+						<input type="hidden" name="nome"   value="<?=$aluno['nome']?>">
+						<div class="col d-flex justify-content-end">
+							<button type="submit" class="btn btn-warning mb-2"><small>Editar</small></button>
+						</div>
+						</form>	
+
+						<form action="/alunoCadastro" method="post" >
+						<input type="hidden" name="action" value="deletar">
+						<input type="hidden" name="codigo" value="<?=$aluno['codigo']?>">
+						<input type="hidden" name="nome"   value="<?=$aluno['nome']?>">
+						<div class="col d-flex justify-content-end">
+							<button type="submit" class="btn btn-danger mb-2"><small>deletar</small></button>
+						</div>
+					</form>		
+				</div>
+			</div>
+
+		<?php } ?> 
+
+			<div class="row mt-5"style="margin-left: 128px;">
+						<nav aria-label="...">
+								  <ul class="pagination">
+								    
+								    <li class="page-item ">
+								      <a class="page-link" href="?pagina=1" tabindex="-1">Primeira</a>
+								    </li>
+								
+								    <?php for ($i=1; $i <= $this->view->total_de_paginas; $i++) { ?>
+								  
+										    <li class="page-item">
+										    	<a class="page-link" href="?pagina=<?=$i?>"><?=$i?></a>
+										    </li>
+								    <?php } ?>
+
+								    <li class="page-item">
+								      <a class="page-link" href="?pagina=<?=$this->view->total_de_paginas?>">Ultima </a>
+								    </li>
+								  
+								  </ul>
+								
+								</nav>
+
+
+			</div>
+
+
+
+		</div>
+
+
+	</div>
+</div>
